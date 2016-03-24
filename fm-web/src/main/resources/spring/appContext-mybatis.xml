@@ -6,16 +6,16 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis.cfg.xml" />
-		<!--<property name="mapperLocations">
+		<!--<property name="configLocation" value="classpath:mybatis.cfg.xml" />-->
+		<property name="mapperLocations">
 			<array>
-				<value>classpath:com/lwm/web/mapper/*Mapper.xml</value>
+				<value>classpath:mapper/*Mapper.xml</value>
 			</array>
-		</property>-->
+		</property>
 	</bean>
 	<!-- 采用扫描指定包的mapper接口，而不是一一定义每个mapper -->
 	<!--<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lwm.web.mapper" />
+		<property name="basePackage" value="pers.lwm.web.mapper" />
 	</bean>-->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />

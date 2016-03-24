@@ -12,6 +12,7 @@
     <modules>
         <module>base</module>
         <module>fm-web</module>
+        <module>fm-model</module>
     </modules>
 
     <build>

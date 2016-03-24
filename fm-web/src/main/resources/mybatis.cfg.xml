@@ -4,7 +4,7 @@
 
 <configuration>
 
-    <mappers>
-        <mapper resource="com/lwm/web/mapper/UserMapper.xml"/>
-    </mappers>
+    <!--<mappers>
+        <mapper resource="pers/lwm/fm/mapper/UserMapper.xml"/>
+    </mappers>-->
 </configuration>

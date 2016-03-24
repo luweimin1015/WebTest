@@ -9,7 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>fm-web</name>
     <artifactId>fm-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -17,6 +20,26 @@
             <artifactId>fm-base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.lwm.fm</groupId>
+            <artifactId>fm-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
+
+    <!--使maven对java中的xml,prop文件打包-->
+    <!--<build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                &lt;!&ndash; 是否替换资源中的属性&ndash;&gt;
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>-->
 
 </project>
