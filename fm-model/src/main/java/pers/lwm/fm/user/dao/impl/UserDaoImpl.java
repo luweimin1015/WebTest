@@ -20,6 +20,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return sqlSession.selectList("pers.lwm.fm.mapper.UserMapper.findAll");
+        return sqlSession.selectList("pers.lwm.fm.mapper.UserMapper.findAll", "a");
     }
 }

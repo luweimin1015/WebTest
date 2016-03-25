@@ -6,5 +6,4 @@
 	<import resource="spring/appContext-mybatis.xml" />
   	<import resource="spring/appContext-datasource.xml" />
 
-	
 </beans>
