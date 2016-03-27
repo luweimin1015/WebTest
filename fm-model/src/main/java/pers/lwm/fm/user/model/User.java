@@ -4,8 +4,17 @@ package pers.lwm.fm.user.model;
  * Created by lwm on 2016/3/22.
  */
 public class User {
+    private int id;
     private String name;
     private String pwd;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -6,6 +6,7 @@ import pers.lwm.fm.user.dao.UserDao;
 import pers.lwm.fm.user.model.User;
 import pers.lwm.fm.user.service.UserService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,5 +21,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userDao.findAll();
+    }
+
+    @Override
+    public void addUser(User user) {
+        userDao.addUser(user);
     }
 }

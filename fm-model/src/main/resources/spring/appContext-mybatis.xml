@@ -4,21 +4,31 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!--获取sqlSession。mybatis通过SqlSessionFactoryBuilder创建SqlSessionFactory，进而获取获取sqlSession -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<!--以该配置文件的内容作为配置信息构建对应的SqlSessionFactoryBuilder，但是后续属性指定的内容会覆盖该配置文	件里面指定的对应内容。 -->
 		<!--<property name="configLocation" value="classpath:mybatis.cfg.xml" />-->
 		<property name="mapperLocations">
 			<array>
-				<value>classpath:mapper/*Mapper.xml</value>
+				<value>classpath:mapper/*Dao.xml</value>
 			</array>
 		</property>
 	</bean>
-	<!-- 采用扫描指定包的mapper接口，而不是一一定义每个mapper -->
-	<!--<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="pers.lwm.web.mapper" />
+	<!--单一mapper接口配置-->
+	<!--<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="pers.lwm.fm.user.dao.UserDao"/>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>-->
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
+
+	<!-- 采用扫描指定包的mapper接口，而不是定义每个mapper。Mybatis-Spring自动注册Mapper
+		对应的MapperFactoryBean对象。多个基包之间可以使用逗号或者分号进行分隔-->
+	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="pers.lwm.fm.*.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
+	<!--<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>-->
 
 </beans>

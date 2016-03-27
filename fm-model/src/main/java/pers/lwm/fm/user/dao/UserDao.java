@@ -1,6 +1,7 @@
 package pers.lwm.fm.user.dao;
 
 
+import org.springframework.stereotype.Repository;
 import pers.lwm.fm.user.model.User;
 
 import java.util.List;
@@ -10,4 +11,5 @@ import java.util.List;
  */
 public interface UserDao {
     List<User> findAll();
+    void addUser(User user);
 }
