@@ -1,6 +1,11 @@
 package pers.lwm.base.util;
 
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -55,7 +60,7 @@ public class HttpUtil {
 
     public static String sendGet(String url,String cookie) throws Exception{
         Map<String, String> map = null;
-        if (!StringUtil.isNullOrEmpty(cookie)) {
+        if (StringUtils.isNotBlank(cookie)) {
             map = new HashMap<>();
             map.put("Cookie", cookie);
         }
@@ -64,12 +69,13 @@ public class HttpUtil {
 
     public static String sendPost(String url,String cookie) throws Exception{
         Map<String, String> map = null;
-        if (null != cookie && "" != cookie) {
+        if (StringUtils.isNotBlank(cookie)) {
             map = new HashMap<>();
             map.put("Cookie", cookie);
         }
         return send(url, "POST", null, map);
     }
+
     private static String send(String url, String method, String param, Map<String, String> headers) throws Exception {
         String result = null;
         HttpURLConnection conn = getConnection(url, method, param, headers);
@@ -159,6 +165,26 @@ public class HttpUtil {
         }
 
         return conn.getInputStream();
+    }
+
+    public static String getByHttpClient(String url) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet get = new HttpGet(url);
+        StringBuffer sb = new StringBuffer();
+        try {
+            CloseableHttpResponse response = httpClient.execute(get);
+            HttpEntity entity= response.getEntity();
+            BufferedReader br = null;
+            br = new BufferedReader(new InputStreamReader(entity.getContent()));
+            String line = "";
+            while ((line = br.readLine()) != null){
+                sb.append(line + "\r\n");
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pers.lwm.fm.user.dao.UserDao">
-    <insert id="addUser" parameterType="pers.lwm.fm.user.model.User">
+    <insert id="addUser" parameterType="pers.lwm.fm.user.domain.User">
         insert into user(name,pwd)
                values( #{name}, #{pwd})
     </insert>
-    <select id="findAll" resultType="pers.lwm.fm.user.model.User">
+    <select id="findAll" resultType="pers.lwm.fm.user.domain.User">
         SELECT * from user
     </select>
 </mapper>

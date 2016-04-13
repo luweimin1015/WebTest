@@ -1,8 +1,8 @@
-package pers.lwm.fm.spider.service.impl;
+package pers.lwm.fm.movie.service.impl;
 
 import org.springframework.stereotype.Service;
 import pers.lwm.base.util.HttpUtil;
-import pers.lwm.fm.spider.service.SpiderService;
+import pers.lwm.fm.movie.service.SpiderService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +21,10 @@ public class SpiderServiceImpl implements SpiderService {
                 "%26nation%3D138&t="+ sf.format(date)+(Math.random()*9+1)*1000000
 +"&Ajax_CallBackArgument0=&Ajax_CallBackArgument1=0&Ajax_CallBackArgument2=138&Ajax_CallBackArgument3=0&Ajax_CallBackArgument4=0&Ajax_CallBackArgument5=0&Ajax_CallBackArgument6=0&Ajax_CallBackArgument7=0&Ajax_CallBackArgument8=&Ajax_CallBackArgument9=0&Ajax_CallBackArgument10=0&Ajax_CallBackArgument11=0&Ajax_CallBackArgument12=0&Ajax_CallBackArgument13=0&Ajax_CallBackArgument14=1&Ajax_CallBackArgument15=0&Ajax_CallBackArgument16=1&Ajax_CallBackArgument17=4&Ajax_CallBackArgument18="+pageIndex+"&Ajax_CallBackArgument19=0";
         System.out.println(url);
-        String result = HttpUtil.sendGet(url, null);
+        //String result = HttpUtil.sendGet(url, null);
+        String result = HttpUtil.getByHttpClient(url);
         return result;
     }
+
+
 }

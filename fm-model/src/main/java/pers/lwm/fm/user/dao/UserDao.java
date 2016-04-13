@@ -1,8 +1,7 @@
 package pers.lwm.fm.user.dao;
 
 
-import org.springframework.stereotype.Repository;
-import pers.lwm.fm.user.model.User;
+import pers.lwm.fm.user.domain.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package pers.lwm.fm.user.model;
+package pers.lwm.fm.user.domain;
 
 /**
  * Created by lwm on 2016/3/22.
@@ -31,4 +31,5 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
 }

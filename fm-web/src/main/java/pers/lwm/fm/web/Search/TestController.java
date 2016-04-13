@@ -2,6 +2,8 @@ package pers.lwm.fm.web.Search;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,20 +13,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pers.lwm.base.util.HttpUtil;
-import pers.lwm.base.util.StringUtil;
-import pers.lwm.fm.spider.service.SpiderService;
-import pers.lwm.fm.spider.service.impl.SpiderServiceImpl;
-import pers.lwm.fm.user.model.User;
+import pers.lwm.fm.movie.service.SpiderService;
+import pers.lwm.fm.movie.service.impl.SpiderServiceImpl;
+import pers.lwm.fm.user.domain.User;
 import pers.lwm.fm.user.service.UserService;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
 @Controller
 public class TestController {
+
+	private static final Logger logger = Logger.getLogger(TestController.class);
+
 	@Autowired
 	private UserService userService;
 
@@ -61,25 +62,30 @@ public class TestController {
 		SpiderService spiderServiceImpl = new SpiderServiceImpl();
 		try {
 			result = spiderServiceImpl.getMv(3);
-			result = result.substring(result.indexOf("{"), result.lastIndexOf("}") + 1);
-			JSONObject json = JSON.parseObject(result);
-			String html = json.getJSONObject("value").getString("listHTML");
-			System.out.println(html);
-			Document doc = Jsoup.parse(html);
-			Elements links = doc.getElementsByTag("a");
-			System.out.println(links.size());
-			int i = 0;
-			String text;
-			for (Element link : links
-				 ) {
-				text = link.text().trim();
-				if (!StringUtil.isNullOrEmpty(text)){
-					System.out.println(i + "-->" + link.text());
-					i++;
-				}
-			}
+			process(result);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		System.out.println(result);
+	}
+
+	private static void process(String result) {
+		result = result.substring(result.indexOf("{"), result.lastIndexOf("}") + 1);
+		JSONObject json = JSON.parseObject(result);
+		String html = json.getJSONObject("value").getString("listHTML");
+		System.out.println(html);
+		Document doc = Jsoup.parse(html);
+		Elements links = doc.select(".total");
+		System.out.println(links.size());
+		int i = 0;
+		String text;
+		for (Element link : links
+				) {
+			text = link.text().trim();
+			if (StringUtils.isNotBlank(text)){
+				System.out.println(i + "-->" + link.text());
+				i++;
+			}
 		}
 	}
 }

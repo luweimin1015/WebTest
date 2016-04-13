@@ -1,6 +1,6 @@
 package pers.lwm.fm.user.service;
 
-import pers.lwm.fm.user.model.User;
+import pers.lwm.fm.user.domain.User;
 
 import java.util.List;
 

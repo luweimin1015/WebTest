@@ -1,4 +1,4 @@
-package pers.lwm.fm.spider.service;
+package pers.lwm.fm.movie.service;
 
 /**
  * Created by lwm on 2016/3/26.
